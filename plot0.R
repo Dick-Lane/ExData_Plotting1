@@ -93,3 +93,9 @@ par( mfcol = c(1,1) )
 ####    toDo much later: experiment to speed construction of data frame
 #   http://stackoverflow.com/questions/1727772/quickly-reading-very-large-tables-as-dataframes-in-r
 #   http://stackoverflow.com/questions/14124813/data-table-fread-function
+
+####    alternative initial processing
+#   head -n 1 [data file] > proj.txt
+#   grep  '^0\{0,1\}[12]/0\{0,1\}2/2007'  [data file]  >>  proj.txt
+##      perhaps find a simpler regex
+##      perhaps use    zgrep ... [zip file]    for second step
