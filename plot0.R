@@ -1,5 +1,8 @@
 ####    create tidy data for use in EDA Project 1       Dick Lane, 2014-07-10
 
+##  work in correct directory for this project
+setwd( '~/Desktop/DS-EDA/ExData_Plotting1' )
+
 ##  household_power_consumption.txt has a header line with variable names
 ##  data values separated by semicolon, ";"
 
