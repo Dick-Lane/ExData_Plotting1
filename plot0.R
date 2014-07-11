@@ -1,12 +1,18 @@
-####    create tidy data for use in EDA Project 1       Dick Lane, 2014-07-10
+####    summary of work on EDA Project 1       Dick Lane, 2014-07-10
 
 ##  work in correct directory for this project
 setwd( '~/Desktop/DS-EDA/ExData_Plotting1' )
 
+#   download data (URL in README.md) to data folder in my course folder
+#   fork & clone repo (per README) into my course folder
+#   symbolic link in project folder for project's data
+#       ln  -s  ../data/household_power_consumption.txt  ./household_power_consumption.txt
+
+####    preliminary examination of data file structure
 ##  household_power_consumption.txt has a header line with variable names
 ##  data values separated by semicolon, ";"
 
-##  dates in  %d/%m/%Y  format  (next items show %d or %m can be 1 digit)
+##  dates in  %d/%m/%Y  format  (next items showed %d or %m can be 1 digit)
 ##  fgrep "2/2007" household_power_consumption.txt shows "1/2/2007"
 ##  fgrep ... | wc  shows 4320 cases for each of "1/2/2007" and "2/2/2007"
 ##      since first pattern matches 1/2/2007, 11/2/2007, 21/2/2007
@@ -36,7 +42,7 @@ hist( heu$Global_active_power ,
 
 ##  plot 2
 dayTime <- strptime( paste(heu$Date,heu$Time) , "%d/%m/%Y %H:%M:%S" )
-dayOfWeek <- weekdays( dayTime , abbreviate = TRUE )
+dayOfWeek <- weekdays( dayTime , abbreviate = TRUE )  ##  not needed
 plot( dayTime , heu$Global_active_power ,
       type = "l" ,
       xlab = '' ,
@@ -59,10 +65,10 @@ legend( 'topright' , lty = 1 ,
 
 ##  plot 4
 par( mfcol = c(2,2) )
-#       figure figure 2, omitting '(kilowatts)'
+#       upper-left: figure 2, omitting '(kilowatts)'
 plot( dayTime , heu$Global_active_power , type = "l" ,
       xlab = '' , ylab = 'Global Active Power' )
-#       figure 3 (without box around legend)
+#       lower-left: figure 3 (without box around legend)
 colors <- c( 'black' , 'red' , 'blue' )
 plot( dayTime , heu$Sub_metering_1 , type = 'l' , col = colors[1] ,
       xlab = '' , ylab = 'Energy sub metering' )
@@ -70,10 +76,20 @@ lines( dayTime , heu$Sub_metering_2 , type = 'l' , col = colors[2] )
 lines( dayTime , heu$Sub_metering_3 , type = 'l' , col = colors[3] )
 legend( 'topright' , lty = 1 , lwd = 2 ,  col = colors , bty = 'n' ,
         legend = c('Sub_metering_1', 'Sub_metering_2', 'Sub_metering_3') )
-#       figure 4
+#       upper-right
 plot( dayTime , heu$Voltage , type = 'l' ,
       xlab = 'datetime' , ylab = 'Voltage' )
-#       figure 5
+#       lower-right
 plot( dayTime , heu$Global_reactive_power , type = 'l' ,
       xlab = 'datetime' , ylab = 'Global_reactive_power' )
 par( mfcol = c(1,1) )
+
+####    toDo: put code fragments into plot#.R to create plot#.png
+
+####    toDo later: find cause(s) of warnings --- see plot1.log
+##  Could not load tcltk.  Will use slower R code instead.  [Mac related ?]
+##  closing unused connection ...       [bug in read.csv2.sql ?]
+
+####    toDo much later: experiment to speed construction of data frame
+#   http://stackoverflow.com/questions/1727772/quickly-reading-very-large-tables-as-dataframes-in-r
+#   http://stackoverflow.com/questions/14124813/data-table-fread-function
