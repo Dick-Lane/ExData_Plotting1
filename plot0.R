@@ -60,12 +60,12 @@ par( mfcol = c(2,2) )
 plot( dayTime , heu$Global_active_power , type = "l" ,
       xlab = '' , ylab = 'Global Active Power (kilowatts)' )
 #       figure 3 (without box around legend)
-plot( dayTime , heu$Sub_metering_1 , type = 'l' , col = 'grey' ,
+colors <- c( 'black' , 'red' , 'blue' )
+plot( dayTime , heu$Sub_metering_1 , type = 'l' , col = colors[1] ,
       xlab = '' , ylab = 'Energy sub metering' )
-lines( dayTime , heu$Sub_metering_2 , type = 'l' , col = 'red' )
-lines( dayTime , heu$Sub_metering_3 , type = 'l' , col = 'blue' )
-legend( 'topright' , lty = 1 ,
-        col = c( 'grey' , 'red' , 'blue' ) , bty = 'n' ,
+lines( dayTime , heu$Sub_metering_2 , type = 'l' , col = colors[2] )
+lines( dayTime , heu$Sub_metering_3 , type = 'l' , col = colors[3] )
+legend( 'topright' , lty = 1 , lwd = 2 ,  col = colors , bty = 'n' ,
         legend = c('Sub_metering_1', 'Sub_metering_2', 'Sub_metering_3') )
 #       figure 4
 plot( dayTime , heu$Voltage , type = 'l' ,
