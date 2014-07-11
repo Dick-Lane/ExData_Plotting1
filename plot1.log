@@ -1,0 +1,58 @@
+> source('~/Desktop/DS-EDA/ExData_Plotting1/plot1.R', echo=TRUE)
+
+> ##  plot1.R     Dick Lane, 2014-07-10
+> 
+> ##  work in correct directory for this project
+> setwd( '~/Desktop/DS-EDA/ExData_Plotting1' )
+
+> ##  read.csv2.sql  is part of  sqldf  package
+> library( sqldf )
+Loading required package: gsubfn
+Loading required package: proto
+Could not load tcltk.  Will use slower R code instead.
+Loading required package: RSQLite
+Loading required package: DBI
+Loading required package: RSQLite.extfuns
+
+> dataPath <- "household_power_consumption.txt"
+
+> sqlFiltr <- "SELECT * FROM file WHERE Date='1/2/2007' OR Date='2/2/2007'"
+
+> heu <- read.csv2.sql( dataPath, sql=sqlFiltr, sep=";" )
+
+> ##  system.time shows about 1 second for system and 32 seconds for user
+> 
+> png( 'plot1.png' )  ##  default size is 480 by 480, unit is pixels
+
+> hist( heu$Global_active_power ,
++       col = "red" ,
++       main = 'Global Active Power' ,
++       xlab = 'Global Active Power (kilowatts)'
++      .... [TRUNCATED] 
+
+> dev.off()
+null device 
+          1 
+Warning messages:
+1: In doTryCatch(return(expr), name, parentenv, handler) :
+  unable to load shared object '/Library/Frameworks/R.framework/Resources/modules//R_X11.so':
+  dlopen(/Library/Frameworks/R.framework/Resources/modules//R_X11.so, 6): Library not loaded: /opt/X11/lib/libSM.6.dylib
+  Referenced from: /Library/Frameworks/R.framework/Resources/modules//R_X11.so
+  Reason: image not found
+2: closing unused connection 3 (household_power_consumption.txt) 
+> 
+> 
+> dayTime <- strptime( paste(heu$Date,heu$Time) , "%d/%m/%Y %H:%M:%S" )
+Warning message:
+closing unused connection 4 (household_power_consumption.txt) 
+> plot( dayTime , heu$Global_active_power ,
++       type = "l" ,
++       xlab = '' ,
++       ylab = 'Global Active Power (kilowatts)'
++ )
+> 
+> 
+> 
+> dev.off()
+null device 
+          1 
